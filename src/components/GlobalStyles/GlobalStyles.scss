@@ -1,14 +1,16 @@
 @import 'normalize.css';
-@import url('https://use.typekit.net/waz4tsx.css');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;600;700&display=swap');
 
-:root
-{
+:root {
     --primary-color: #fe2c55;
+    --black-color: #000;
+    --whilte-color: #fff;
+    ---text-color: #161823;
 
     /* Default Layout*/
     --default-layout-width: 1150px;
     --default-layout-header-height: 60px;
-
+    --default-layout-header-horizontal-padding: 24px;
 }
 
 html {
@@ -19,8 +21,21 @@ body {
     margin: 0;
     padding: 0;
     font-size: 1.6rem;
-    font-family: ibm-plex-sans, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+    // color: var(--text-color);
+    box-sizing: border-box;
+}
 
+button,
+input,
+[tabindex] {
+    border: none;
+    outline: none;
+}
+
+a {
+    // color: var(--text-color);
+    text-decoration: none;
 }

@@ -22,7 +22,6 @@ function App() {
                   Layout = Fragment
                 }
                 else {
-                  console.log("DefaultLayout")
                   Layout = DefaultLayout
                 }
                 return (
