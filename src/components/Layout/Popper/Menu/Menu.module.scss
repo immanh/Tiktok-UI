@@ -22,3 +22,37 @@
         }
     }
 }
+// Header
+.header {
+    display: flex;
+    margin-top: -10px;
+    height: 50px;
+    user-select: none;
+}
+
+.back-icon {
+    padding: 0 16px 0 18px;
+    cursor: pointer;
+    height: 100%;
+    background-color: transparent;
+}
+
+.heading {
+    transform: translateX(calc((-50%) + 21px));
+    margin: auto;
+    font-weight: 600;
+}
+
+// .header-menu {
+//     height: 50px;
+//     width: 100%;
+//     line-height: 50px;
+//     margin-left: 8px;
+//     // display: flex;
+//     .headeing {
+//         color: rgba(22, 24, 35);
+//         font-weight: 600;
+//         margin-left: 0;
+//         text-align: center;
+//     }
+// }

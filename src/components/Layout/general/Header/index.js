@@ -28,6 +28,20 @@ const MENU_ITEMS = [
         id: 1,
         title: 'English',
         leftIcon: <FontAwesomeIcon icon={faLanguage} />,
+        children: {
+            item: 'Languages',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+            ]
+        }
+
     },
     {
         id: 2,
@@ -52,9 +66,10 @@ function Header() {
     //         setSearchResult([1, 2, 3])
     //     }, 0)
     // })
+    const handleChangeMenu = (item) => {
+        console.log(item)
 
-
-
+    }
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -97,6 +112,7 @@ function Header() {
                     <Menu
                         width='224px'
                         items={MENU_ITEMS}
+                        onChange={handleChangeMenu}
                     >
                         <div className={cx('more-menu-icon')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />

@@ -24,10 +24,10 @@ body {
     font-family: 'IBM Plex Sans', sans-serif;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
-    // color: var(--text-color);
+}
+* {
     box-sizing: border-box;
 }
-
 button,
 input,
 [tabindex] {
@@ -36,6 +36,5 @@ input,
 }
 
 a {
-    // color: var(--text-color);
     text-decoration: none;
 }
