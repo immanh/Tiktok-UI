@@ -3,12 +3,13 @@ import styles from './AccountItem.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Images } from '../Images';
 const cx = classNames.bind(styles)
 
 function AccountItem() {
     return (
         <div className={cx('account')}>
-            <img src='https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/8f228189491f72fa186192209758be77~c5_100x100.jpeg?x-expires=1680080400&x-signature=scbcwvrcXXb0g33PuecCXZUxOt8%3D' className={cx('avatar')} alt='Account avatar'></img>
+            <Images src='https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/8f228189491f72fa186192209758be77~c5_100x100.jpeg?x-expires=1680080400&x-signature=scbcwvrcXXb0g33PuecCXZUxOt8%3D' className={cx('avatar')} alt='Account avatar'></Images>
             <div className={cx('info')}>
                 <h4 className={cx('username')}>
                     <span>Đức Mạnh</span>
