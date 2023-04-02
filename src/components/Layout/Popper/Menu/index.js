@@ -45,10 +45,11 @@ function Menu({ children, width, items = [], onChange = defaultFn }) {
     }
     return (
         <Tippy
-            visible
             interactive
+            visible
             delay={[0, 700]}
             placement='bottom-end'
+            onHide={() => setMenuItem(menuItem.slice(0, 1))}
             render={attrs => (
                 <div className={cx('menu-list')} style={{ 'width': width }} tabIndex="-1" {...attrs}>
                     <MoreMenuPopper className={cx('menu-box')}>

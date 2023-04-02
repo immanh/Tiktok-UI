@@ -4,26 +4,20 @@ import styles from './Header.module.scss';
 // Config classnames
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleNotch, faEllipsisVertical, faMagnifyingGlass, faXmarkCircle, faPlus, faLanguage, faQuestion } from '@fortawesome/free-solid-svg-icons'
-import { faMoon } from '@fortawesome/free-regular-svg-icons'
-import Tippy from '@tippyjs/react/headless'
-// import { faMagnifyingGlass } from '@fortawesome/free-light-svg-icons';
+import { faCircleNotch, faEllipsisVertical, faMagnifyingGlass, faXmarkCircle, faPlus, faLanguage, faQuestion, faPaperPlane, faInbox, faCoins, faGear, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faUser } from '@fortawesome/free-regular-svg-icons'
+import HeadlessTippy from '@tippyjs/react/headless'
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import images from '~/assets/img'
 import { Popper as SearchPopper } from '~/components/Layout/Popper'
 import AccountItem from '~/components/AccountItem'
-import MenuItem from '../../Popper/Menu/MenuItem'
 import Button from '~/components/Button'
 import ToggleButton from './ToggleButton'
 import Menu from '~/components/Layout/Popper/Menu'
+import { MessageIcon, InboxIcon, SearchIcon } from '~/components/Icons';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faLanguage, faQuestion } from '@fortawesome/free-solid-svg-icons'
-// import { faMoon } from '@fortawesome/free-regular-svg-icons'
-// import Button from '~/components/Button'
-// import MenuItem from '~/components/Layout/general/MenuItem'
-// import ToggleButton from '~/components/Layout/general/Header/ToggleButton'
-
-const MENU_ITEMS = [
+const notLoggedInMenu = [
     {
         id: 1,
         title: 'English',
@@ -56,9 +50,35 @@ const MENU_ITEMS = [
         rightButton: <ToggleButton />
     }
 ]
+const loggedInMenu = [
+    {
+        title: 'View Profile',
+        leftIcon: <FontAwesomeIcon icon={faUser} />,
+        to: '/@immm481',
+    },
+    {
+        title: 'Get Coins',
+        leftIcon: <FontAwesomeIcon icon={faCoins} />,
+        to: '/coin',
+    },
+    {
+        title: 'Settings',
+        leftIcon: <FontAwesomeIcon icon={faGear} />,
+        to: '/setting',
+    },
+    ...notLoggedInMenu,
+    {
+        title: 'Log out',
+        type: 'logout',
+        leftIcon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+        border: true,
+    },
+]
 
+const cx = classNames.bind(styles)
 function Header() {
-    const cx = classNames.bind(styles)
+    // const loggedIn = true;
+    const [loggedIn, setLoggedIn] = useState(true)
     const [searchResult, setSearchResult] = useState([])
 
     // useEffect(() => {
@@ -67,14 +87,20 @@ function Header() {
     //     }, 0)
     // })
     const handleChangeMenu = (item) => {
-        console.log(item)
+        switch (item.type) {
+            case 'logout':
+                setLoggedIn(false)
+                break
+            default:
+                throw new Error(`Invalid type ${item.type}`)
+        }
 
     }
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <img className={cx('logo')} src={images.logo} alt="Tiktok logo" />
-                <Tippy
+                <HeadlessTippy
                     interactive
                     // visible={searchResult.length > 0}
                     render={attrs => (
@@ -98,26 +124,62 @@ function Header() {
                         </button>
                         <FontAwesomeIcon className={cx('search__loading')} icon={faCircleNotch} />
                         <button className={cx('search__search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
                 <div className={cx('actions')}>
 
                     <Button href='/upload' text size='medium' target='_blank' leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                         Upload
                     </Button>
-                    <Button primary size target='_blank'>Login</Button>
-                    {/* <Button rounded customClass={cx('install')} size target='_blank'>Install App</Button> */}
+                    {
+                        loggedIn
+                            ?
+                            <>
+                                <Tippy delay={[0, 200]} content='Messages' placement='bottom'>
+                                    <button className={cx('icon')}>
+                                        <MessageIcon className={cx('user-message')} />
+                                    </button>
+                                </Tippy>
+                                <Tippy delay={[0, 200]} content='Inbox' placement='bottom'>
+                                    <button className={cx('icon')}>
+                                        <InboxIcon className={cx('user-inbox')} />
+                                    </button>
+                                </Tippy>
+                            </>
+                            :
+                            <>
+                                <Button primary size target='_blank'>Login</Button>
+                                {/* <Button rounded customClass={cx('install')} size target='_blank'>Install App</Button> */}
+                            </>
+                    }
+                    {console.log(loggedIn)}
                     <Menu
                         width='224px'
-                        items={MENU_ITEMS}
+                        items={loggedIn ? loggedInMenu : notLoggedInMenu}
                         onChange={handleChangeMenu}
+
                     >
                         <div className={cx('more-menu-icon')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                            {
+                                loggedIn
+                                    ?
+                                    <>
+                                        <img
+                                            className={cx('user-avatar')}
+                                            src='https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/9e57e873376ca5f0fac691e09bcd4e45~c5_100x100.jpeg?x-expires=1680508800&x-signature=mq9n%2BECNM2JyHgisdgIsVj5QNB4%3D'
+                                            alt='Nguyen Van A'
+                                        />
+                                    </>
+                                    :
+                                    <>
+                                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                                    </>
+                            }
                         </div>
                     </Menu>
+
 
 
                 </div>

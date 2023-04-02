@@ -7,7 +7,6 @@ function Button({ to, href, primary = false, classNames, customClass, leftIcon =
     const props =
     {
         onClick,
-
         ...others,
     }
     const classes = cx('wrapper',

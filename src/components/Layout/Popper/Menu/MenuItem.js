@@ -5,11 +5,15 @@ import Button from '~/components/Button'
 const cx = classNames.bind(styles)
 
 function MenuItem({ data, onSelect }) {
+    const classes = cx('menu-child',
+        {
+            separate: data.border,
+        })
     return (
         <Button
             leftIcon={data.leftIcon}
             to={data.to}
-            classNames={cx('menu-child')}
+            classNames={classes}
             customIcon={cx('icon')}
             rightButton={data.rightButton}
             onClick={onSelect}

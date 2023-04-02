@@ -5,6 +5,11 @@
     --search-top-space: 9px;
     --search-btn-width: 48px;
 
+    /*Actions*/
+    --action-user-icon-width: 32px;
+    --action-user-icon-height: 32px;
+    --action-user-icon-margin: 16px;
+
     width: 100%;
     height: var(--default-layout-header-height);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
@@ -102,15 +107,64 @@ input:not(:placeholder-shown) ~ .search__search-btn {
 /* Actions */
 .actions {
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 .more-menu-icon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     margin-left: 20px;
-    transform: translateY(calc(100% / 6 - 6px));
+    transform: translateY(calc(100% / 6 - 4px));
     padding: 5px 0;
     width: 20px;
     font-size: 2rem;
+    cursor: pointer;
+    &:has(.user-avatar) {
+        padding: 0;
+    }
+    .user-avatar {
+        width: var(--action-user-icon-width);
+        height: var(--action-user-icon-height);
+        line-height: 100%;
+        border-radius: 50%;
+        margin-right: 14px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+}
+.icon {
+    position: relative;
+    height: var(--action-user-icon-height);
+    width: var(--action-user-icon-width);
+    color: rgba(22, 24, 35, 1);
+    // padding: 4px 5px;
+    line-height: calc(100% - 1px);
+    padding: 0;
+    background-color: transparent;
+    margin-right: var(--action-user-icon-margin);
+    cursor: pointer;
+    &::before {
+        position: absolute;
+        content: '99';
+        display: block;
+        line-height: 20px;
+        padding: 0 2px;
+        text-align: center;
+        bottom: 50%;
+        left: 60%;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        font-size: 1rem;
+    }
+}
+
+/*Logged In*/
+.user-message {
+}
+
+.user-inbox {
 }
