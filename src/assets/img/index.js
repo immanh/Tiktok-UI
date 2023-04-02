@@ -2,7 +2,7 @@
 
 const images =
 {
-    logo: require('~/assets/img/logo.svg').default,
+    logo: require('~/components/Icons'),
     defaultImg: require('~/assets/img/default-img.png')
 }
 export default images

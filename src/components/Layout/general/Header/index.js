@@ -16,7 +16,7 @@ import Button from '~/components/Button'
 import ToggleButton from './ToggleButton'
 import Menu from '~/components/Layout/Popper/Menu'
 import { Images } from '~/components/Images'
-import { MessageIcon, InboxIcon, SearchIcon } from '~/components/Icons';
+import { MessageIcon, InboxIcon, SearchIcon, LogoIcon } from '~/components/Icons';
 
 const notLoggedInMenu = [
     {
@@ -100,9 +100,12 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img className={cx('logo')} src={images.logo} alt="Tiktok logo" />
+                <div className={cx('logo')}>
+                    <LogoIcon />
+                </div>
+                {/* <img className={cx('logo')} src={LogoIcon} alt="Tiktok logo" /> */}
                 <HeadlessTippy
-                    interactive
+                    interactives
                     // visible={searchResult.length > 0}
                     render={attrs => (
                         <div className={cx('search-box')} tabIndex="-1" {...attrs}>
