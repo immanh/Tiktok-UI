@@ -15,6 +15,7 @@ import AccountItem from '~/components/AccountItem'
 import Button from '~/components/Button'
 import ToggleButton from './ToggleButton'
 import Menu from '~/components/Layout/Popper/Menu'
+import { Images } from '~/components/Images'
 import { MessageIcon, InboxIcon, SearchIcon } from '~/components/Icons';
 
 const notLoggedInMenu = [
@@ -139,12 +140,14 @@ function Header() {
                             <>
                                 <Tippy delay={[0, 200]} content='Messages' placement='bottom'>
                                     <button className={cx('icon')}>
-                                        <MessageIcon className={cx('user-message')} />
+                                        <MessageIcon className={cx('user-message')} color='rgba(22, 24, 35, 1)' />
+                                        <sup className={cx('badge')}>8</sup>
                                     </button>
                                 </Tippy>
                                 <Tippy delay={[0, 200]} content='Inbox' placement='bottom'>
                                     <button className={cx('icon')}>
-                                        <InboxIcon className={cx('user-inbox')} />
+                                        <InboxIcon className={cx('user-inbox')} color='rgba(22, 24, 35, 1)' />
+                                        <sup className={cx('badge')}>10</sup>
                                     </button>
                                 </Tippy>
                             </>
@@ -154,7 +157,6 @@ function Header() {
                                 {/* <Button rounded customClass={cx('install')} size target='_blank'>Install App</Button> */}
                             </>
                     }
-                    {console.log(loggedIn)}
                     <Menu
                         width='224px'
                         items={loggedIn ? loggedInMenu : notLoggedInMenu}
@@ -166,7 +168,7 @@ function Header() {
                                 loggedIn
                                     ?
                                     <>
-                                        <img
+                                        <Images
                                             className={cx('user-avatar')}
                                             src='https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/9e57e873376ca5f0fac691e09bcd4e45~c5_100x100.jpeg?x-expires=1680508800&x-signature=mq9n%2BECNM2JyHgisdgIsVj5QNB4%3D'
                                             alt='Nguyen Van A'

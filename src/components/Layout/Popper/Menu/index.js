@@ -46,7 +46,7 @@ function Menu({ children, width, items = [], onChange = defaultFn }) {
     return (
         <Tippy
             interactive
-            visible
+            // visible
             delay={[0, 700]}
             placement='bottom-end'
             onHide={() => setMenuItem(menuItem.slice(0, 1))}
