@@ -5,6 +5,7 @@ import { Popper as SearchPopper } from '~/components/Layout/Popper'
 import AccountItem from '~/components/AccountItem'
 import { SearchIcon } from '~/components/Icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import axios from 'axios'
 
 import styles from './Search.module.scss'
 import classNames from 'classnames/bind'
@@ -24,10 +25,16 @@ function Search() {
             return
         }
         setLoading(true)
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
-            .then((res) => res.json())
+        axios
+            .get(`https://tiktok.fullstack.edu.vn/api/users/search`, {
+                params: {
+                    q: debounce,
+                    type: 'less',
+                },
+            })
             .then((res) => {
-                setSearchResult(res.data)
+                console.log(res.data.data)
+                setSearchResult(res.data.data)
                 setLoading(false)
             })
             .catch((err) => {
