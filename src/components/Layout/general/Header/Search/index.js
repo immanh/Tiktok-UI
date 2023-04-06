@@ -3,26 +3,37 @@ import { faCircleNotch, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import HeadlessTippy from '@tippyjs/react/headless'
 import { Popper as SearchPopper } from '~/components/Layout/Popper'
 import AccountItem from '~/components/AccountItem'
-import { SearchIcon } from '~/components/Icons';
+import { SearchIcon } from '~/components/Icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
-import styles from './Search.module.scss';
-import classNames from 'classnames/bind';
+import styles from './Search.module.scss'
+import classNames from 'classnames/bind'
+import { useDebounce } from '~/components/hooks'
 const cx = classNames.bind(styles)
 
 function Search() {
-    const [searchResult, setSearchResult] = useState([])
     const [searchValue, setSearchValue] = useState('')
+    const [searchResult, setSearchResult] = useState([])
     const [showSearchResult, setShowSearchResult] = useState(true)
-
+    const [loading, setLoading] = useState(false)
+    const debounce = useDebounce(searchValue, 800)
     const inputSearchRef = useRef()
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3])
-        }, 0)
-    })
+        if (!debounce) {
+            return
+        }
+        setLoading(true)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data)
+                setLoading(false)
+            })
+            .catch((err) => {
+                throw new Error(err.message)
+            })
+    }, [debounce])
     const handleHideResult = () => {
         setShowSearchResult(false)
     }
@@ -30,13 +41,14 @@ function Search() {
         <HeadlessTippy
             interactive
             visible={showSearchResult && searchResult.length > 0}
-            render={attrs => (
+            render={(attrs) => (
                 <div className={cx('search-box')} tabIndex="-1" {...attrs}>
                     <SearchPopper>
                         <h4 className={cx('search-title')}>Account</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <p className={cx('search-more-result')}>{`Xem tất cả kết quả dành cho .....`}</p>
+                        {searchResult.map((result) => (
+                            <AccountItem key={result.id} user={result} />
+                        ))}
+                        <p className={cx('search-more-result')}>{`Xem tất cả kết quả dành cho "${searchValue}"`}</p>
                     </SearchPopper>
                 </div>
             )}
@@ -45,34 +57,36 @@ function Search() {
             <div className={cx('search')}>
                 <input
                     value={searchValue}
-                    ref={inputSearchRef}
-                    placeholder='Search accounts and video'
+                    placeholder="Search accounts and video"
                     spellCheck={false}
                     onChange={(e) => {
-                        setSearchValue(e.target.value)
-
+                        const inputValue = e.target.value
+                        if (inputValue.trim() || inputValue !== ' ') {
+                            setSearchValue(e.target.value)
+                            setSearchResult([])
+                        }
                     }}
                     onFocus={() => {
                         setShowSearchResult(true)
                     }}
                 />
-                <button className={cx('search__clear-btn')} onClick={() => {
-
-                    setSearchValue('')
-                    inputSearchRef.current.focus()
-                    setSearchResult([])
-                }}>
-                    <FontAwesomeIcon icon={faXmarkCircle} />
+                <button
+                    className={cx('search__clear-btn')}
+                    onClick={() => {
+                        setSearchValue('')
+                        inputSearchRef.current.focus()
+                        setSearchResult([])
+                    }}
+                >
+                    {loading || <FontAwesomeIcon icon={faXmarkCircle} />}
                 </button>
-                {
-                    // !!searchValue && <FontAwesomeIcon className={cx('search__loading')} icon={faCircleNotch} />
-                }
+                {loading && <FontAwesomeIcon className={cx('search__loading')} icon={faCircleNotch} />}
                 <button className={cx('search__search-btn')}>
                     <SearchIcon />
                 </button>
             </div>
         </HeadlessTippy>
-    );
+    )
 }
 
-export default Search;
+export default Search

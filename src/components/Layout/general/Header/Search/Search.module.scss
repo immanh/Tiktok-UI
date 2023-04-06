@@ -44,6 +44,18 @@
     font-size: 1.5rem;
     cursor: pointer;
 }
+.search__loading {
+    right: calc(var(--search-btn-width) + 22px);
+    animation: spinner 2s infinite linear;
+}
+@keyframes spinner {
+    from {
+        transform: translateY(calc((-50%) + 1px)) rotate(180deg);
+    }
+    to {
+        transform: translateY(calc((-50%) + 1px)) rotate(360deg);
+    }
+}
 .search__search-btn {
     padding-left: 2px;
     font-size: 2rem;
@@ -72,7 +84,7 @@ input:not(:placeholder-shown) ~ .search__search-btn {
 .search-more-result {
     padding: 12px;
     color: #161823;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     margin: 0;
     &:hover {

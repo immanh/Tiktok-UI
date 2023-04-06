@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles)
 
 function HeaderMenu({ title, onBack }) {
+    const a = '2'
     return (
         <header className={cx('header')}>
             <button onClick={onBack} className={cx('back-icon')}>
