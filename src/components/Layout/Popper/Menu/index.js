@@ -1,17 +1,16 @@
-
 import { useState } from 'react'
-import styles from './Menu.module.scss';
+import styles from './Menu.module.scss'
 // Config classnames
-import classNames from 'classnames/bind';
+import classNames from 'classnames/bind'
 import Tippy from '@tippyjs/react/headless'
-import { Popper as MoreMenuPopper } from '../index.js';
+import { Popper as MoreMenuPopper } from '../index.js'
 import MenuItem from '~/components/Layout/Popper/Menu/MenuItem'
 import HeaderMenu from './HeaderMenu'
 
 const cx = classNames.bind(styles)
-const defaultFn = () => { }
+const defaultFn = () => {}
 
-function Menu({ children, width, items = [], onChange = defaultFn }) {
+function Menu({ children, width, hideOnClick = false, items = [], onChange = defaultFn }) {
     const [menuItem, setMenuItem] = useState([{ data: items }])
     const menuLength = menuItem.length
     const currentItem = menuItem[menuLength - 1]
@@ -30,13 +29,11 @@ function Menu({ children, width, items = [], onChange = defaultFn }) {
                     onSelect={() => {
                         if (isParent) {
                             setMenuItem((prev) => [...prev, item.children])
-                        }
-                        else {
+                        } else {
                             onChange(item)
                         }
                     }}
                 />
-
             )
         })
     }
@@ -47,22 +44,22 @@ function Menu({ children, width, items = [], onChange = defaultFn }) {
         <Tippy
             interactive
             // visible
+            hideOnClick={hideOnClick}
             delay={[0, 700]}
-            placement='bottom-end'
+            placement="bottom-end"
             onHide={() => setMenuItem(menuItem.slice(0, 1))}
-            render={attrs => (
-                <div className={cx('menu-list')} style={{ 'width': width }} tabIndex="-1" {...attrs}>
+            render={(attrs) => (
+                <div className={cx('menu-list')} style={{ width: width }} tabIndex="-1" {...attrs}>
                     <MoreMenuPopper className={cx('menu-box')}>
-                        {(menuLength > 1) && <HeaderMenu title='Languages' onBack={handleBack} />}
+                        {menuLength > 1 && <HeaderMenu title="Languages" onBack={handleBack} />}
                         {renderItem()}
-
                     </MoreMenuPopper>
                 </div>
             )}
         >
             {children}
         </Tippy>
-    );
+    )
 }
 
-export default Menu;
+export default Menu

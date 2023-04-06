@@ -5,7 +5,8 @@ import { Popper as SearchPopper } from '~/components/Layout/Popper'
 import AccountItem from '~/components/AccountItem'
 import { SearchIcon } from '~/components/Icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as request from '~/components/utils/request'
+import * as searchServices from '~/apiServices/searchServices.js'
+import * as request from '~/utils/request'
 
 import styles from './Search.module.scss'
 import classNames from 'classnames/bind'
@@ -25,23 +26,37 @@ function Search() {
             return
         }
         setLoading(true)
-        request
-            .get(`users/search`, {
-                params: {
-                    q: debounce,
-                    type: 'less',
-                },
-            })
-            .then((res) => {
-                setSearchResult(res.data)
-                setLoading(false)
-            })
-            .catch((err) => {
-                throw new Error(err.message)
-            })
+        // request
+        //     .get(`users/search`, {
+        //         params: {
+        //             q: debounce,
+        //             type: 'less',
+        //         },
+        //     })
+        //     .then((res) => {
+        //         setSearchResult(res.data)
+        //         setLoading(false)
+        //     })
+        //     .catch((err) => {
+        //         throw new Error(err.message)
+        //     })
+        // const fetchApi = async () => {
+        //     setLoading(true)
+        //     const responseResult = await searchServices.search(debounce)
+        //     setSearchResult(responseResult)
+        //     setLoading(false)
+        // }
+        // fetchApi()
     }, [debounce])
     const handleHideResult = () => {
         setShowSearchResult(false)
+    }
+    const handleSearchValue = (e) => {
+        const inputValue = e.target.value
+        if (!inputValue.startsWith(' ')) {
+            setSearchValue(inputValue)
+            setSearchResult([])
+        }
     }
     return (
         <HeadlessTippy
@@ -63,15 +78,9 @@ function Search() {
             <div className={cx('search')}>
                 <input
                     value={searchValue}
-                    placeholder="Search accounts and video"
+                    placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={(e) => {
-                        const inputValue = e.target.value
-                        if (inputValue.trim() || inputValue !== ' ') {
-                            setSearchValue(e.target.value)
-                            setSearchResult([])
-                        }
-                    }}
+                    onChange={handleSearchValue}
                     onFocus={() => {
                         setShowSearchResult(true)
                     }}
@@ -87,7 +96,7 @@ function Search() {
                     {loading || <FontAwesomeIcon icon={faXmarkCircle} />}
                 </button>
                 {loading && <FontAwesomeIcon className={cx('search__loading')} icon={faCircleNotch} />}
-                <button className={cx('search__search-btn')}>
+                <button className={cx('search__search-btn')} onMouseDown={(e) => e.preventDefault()}>
                     <SearchIcon />
                 </button>
             </div>

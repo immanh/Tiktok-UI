@@ -24,6 +24,7 @@ import Menu from '~/components/Layout/Popper/Menu'
 
 import { Images } from '~/components/Images'
 import Search from './Search'
+import configRoutes from '~/components/routes/configRoutes'
 
 const notLoggedInMenu = [
     {
@@ -93,13 +94,14 @@ function Header() {
                 setLoggedIn(false)
                 break
             default:
-                throw new Error(`Invalid type ${item.type}`)
+                // throw new Error(`Invalid type ${item.type}`)
+                console.log(`Invalid type ${item.type}`)
         }
     }
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={'/'} className={cx('logo')}>
+                <Link to={configRoutes.home} className={cx('logo')}>
                     <LogoIcon />
                 </Link>
                 <Search />
@@ -142,7 +144,7 @@ function Header() {
                                 <>
                                     <Images
                                         className={cx('user-avatar')}
-                                        src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/9e57e873376ca5f0fac691e09bcd4e45~c5_720x720.jpeg?x-expires=1680768000&x-signature=3%2B%2F8t6108mIGKr9pQDTXMz8lfkI%3D"
+                                        src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/8f228189491f72fa186192209758be77~c5_100x100.jpeg?x-expires=1680962400&x-signature=bdc%2BCZ4%2FoNQ9rwDGWbOkDuJem34%3D"
                                         alt="Nguyen Van A"
                                     />
                                 </>
