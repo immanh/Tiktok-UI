@@ -4,11 +4,11 @@ import styles from './Menu.module.scss'
 import classNames from 'classnames/bind'
 import Tippy from '@tippyjs/react/headless'
 import { Popper as MoreMenuPopper } from '../index.js'
-import MenuItem from '~/components/Layout/Popper/Menu/MenuItem'
+import MenuItem from '~/layouts/Popper/Menu/MenuItem'
 import HeaderMenu from './HeaderMenu'
 
 const cx = classNames.bind(styles)
-const defaultFn = () => {}
+const defaultFn = () => { }
 
 function Menu({ children, width, hideOnClick = false, items = [], onChange = defaultFn }) {
     const [menuItem, setMenuItem] = useState([{ data: items }])
@@ -43,7 +43,7 @@ function Menu({ children, width, hideOnClick = false, items = [], onChange = def
     return (
         <Tippy
             interactive
-            // visible
+            visible
             hideOnClick={hideOnClick}
             delay={[0, 700]}
             placement="bottom-end"
@@ -52,7 +52,7 @@ function Menu({ children, width, hideOnClick = false, items = [], onChange = def
                 <div className={cx('menu-list')} style={{ width: width }} tabIndex="-1" {...attrs}>
                     <MoreMenuPopper className={cx('menu-box')}>
                         {menuLength > 1 && <HeaderMenu title="Languages" onBack={handleBack} />}
-                        {renderItem()}
+                        <div className={cx('menu-body')}>{renderItem()}</div>
                     </MoreMenuPopper>
                 </div>
             )}

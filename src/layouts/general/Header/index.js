@@ -20,11 +20,11 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import Button from '~/components/Button'
 import ToggleButton from './ToggleButton'
-import Menu from '~/components/Layout/Popper/Menu'
+import Menu from '~/layouts/Popper/Menu'
 
 import { Images } from '~/components/Images'
 import Search from './Search'
-import configRoutes from '~/components/routes/configRoutes'
+import routes from '~/config/routes'
 
 const notLoggedInMenu = [
     {
@@ -34,6 +34,78 @@ const notLoggedInMenu = [
         children: {
             item: 'Languages',
             data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Việt Nam',
+                },
                 {
                     code: 'en',
                     title: 'English',
@@ -101,7 +173,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={configRoutes.home} className={cx('logo')}>
+                <Link to={routes.home} className={cx('logo')}>
                     <LogoIcon />
                 </Link>
                 <Search />

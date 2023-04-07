@@ -2,6 +2,7 @@
 .search,
 .search-box {
     width: 415px;
+    // overflow-y: overlay;
 }
 .search {
     position: relative;
@@ -23,9 +24,9 @@
         caret-color: var(--primary-color);
     }
     &::after {
-        content: '';
         position: absolute;
-        top: var(--search-top-space);
+        content: '';
+        top: calc(var(--search-top-space) - 1px);
         right: var(--search-btn-width);
         width: 1px;
         height: calc(var(--search-height) - var(--search-top-space) * 2);
@@ -35,12 +36,16 @@
         border-color: rgba(22, 24, 35, 0.34);
     }
 }
+.search-box-body 
+{
+    overflow-y: overlay;
+}
 .search__clear-btn,
 .search__loading {
     position: absolute;
     right: calc(var(--search-btn-width) + 16px);
     top: 50%;
-    transform: translateY(calc((-50%) + 2px));
+    transform: translateY(calc((-50%) + 1px));
     color: rgba(22, 24, 35, 0.34);
     font-size: 1.5rem;
     cursor: pointer;
@@ -51,10 +56,10 @@
 }
 @keyframes spinner {
     from {
-        transform: translateY(calc((-50%) + 1px)) rotate(180deg);
+        transform: translateY(-50%) rotate(180deg);
     }
     to {
-        transform: translateY(calc((-50%) + 1px)) rotate(360deg);
+        transform: translateY(-50%) rotate(360deg);
     }
 }
 .search__search-btn {

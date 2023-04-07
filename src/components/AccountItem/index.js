@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Images } from '../Images';
 const cx = classNames.bind(styles)
-const a = '2'
 function AccountItem({ user }) {
     return (
         <Link to={`profile/@${user.nickname}`} className={cx('account')}>
