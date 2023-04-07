@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Menu.module.scss'
 // Config classnames
 import classNames from 'classnames/bind'
@@ -8,10 +8,13 @@ import MenuItem from '~/layouts/Popper/Menu/MenuItem'
 import HeaderMenu from './HeaderMenu'
 
 const cx = classNames.bind(styles)
-const defaultFn = () => { }
+const defaultFn = () => {}
 
 function Menu({ children, width, hideOnClick = false, items = [], onChange = defaultFn }) {
     const [menuItem, setMenuItem] = useState([{ data: items }])
+    useEffect(() => {
+        setMenuItem([{ data: items }])
+    }, [items])
     const menuLength = menuItem.length
     const currentItem = menuItem[menuLength - 1]
 
