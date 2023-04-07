@@ -1,8 +1,9 @@
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from './Menu.module.scss';
+import PropTypes from 'prop-types'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styles from './Menu.module.scss'
 // Config classnames
-import classNames from 'classnames/bind';
+import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 function HeaderMenu({ title, onBack }) {
@@ -13,7 +14,10 @@ function HeaderMenu({ title, onBack }) {
             </button>
             <h3 className={cx('heading')}>{title}</h3>
         </header>
-    );
+    )
 }
-
-export default HeaderMenu;
+HeaderMenu.propTypes = {
+    title: PropTypes.string,
+    onBack: PropTypes.func.isRequired,
+}
+export default HeaderMenu

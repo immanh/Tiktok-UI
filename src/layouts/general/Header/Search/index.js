@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { faCircleNotch, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import HeadlessTippy from '@tippyjs/react/headless'
@@ -77,7 +76,7 @@ function Search() {
     const [searchResult, setSearchResult] = useState([])
     const [showSearchResult, setShowSearchResult] = useState(true)
     const [loading, setLoading] = useState(false)
-    const debounce = useDebounce(searchValue, 800)
+    const debounce = useDebounce('Manh', true)
     const inputSearchRef = useRef()
 
     useEffect(() => {
@@ -120,7 +119,7 @@ function Search() {
         }
     }
     return (
-        // Using a wrapper <div> or <span> tag around the reference 
+        // Using a wrapper <div> or <span> tag around the reference
         // element solves this by creating a new parentNode context
         // Fix warning of tippy
         <div>

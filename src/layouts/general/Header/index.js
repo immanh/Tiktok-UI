@@ -210,12 +210,8 @@ function Header() {
                             {/* <Button rounded customClass={cx('install')} size target='_blank'>Install App</Button> */}
                         </>
                     )}
-                    {/* {
-                        console.log(notLoggedInMenu)
-                    } */}
-                    <Menu width="224px" items={loggedIn ? loggedInMenu : notLoggedInMenu} onChange={handleChangeMenu}>
+                    <Menu width={224} items={loggedIn ? loggedInMenu : notLoggedInMenu} onChange={handleChangeMenu}>
                         <div className={cx('more-menu-icon')}>
-                            {console.log(loggedIn ? loggedInMenu : notLoggedInMenu)}
                             {loggedIn ? (
                                 <>
                                     <Images

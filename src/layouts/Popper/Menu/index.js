@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import styles from './Menu.module.scss'
 // Config classnames
 import classNames from 'classnames/bind'
@@ -64,5 +65,11 @@ function Menu({ children, width, hideOnClick = false, items = [], onChange = def
         </Tippy>
     )
 }
-
+Menu.propTypes = {
+    children: PropTypes.node.isRequired,
+    width: PropTypes.number,
+    hideOnClick: PropTypes.bool,
+    items: PropTypes.array.isRequired,
+    onChange: PropTypes.func,
+}
 export default Menu
