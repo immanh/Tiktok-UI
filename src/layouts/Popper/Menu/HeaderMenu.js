@@ -17,7 +17,7 @@ function HeaderMenu({ title, onBack }) {
     )
 }
 HeaderMenu.propTypes = {
-    title: PropTypes.string,
-    onBack: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    onBack: PropTypes.func,
 }
 export default HeaderMenu

@@ -18,7 +18,6 @@ function Menu({ children, width, hideOnClick = false, items = [], onChange = def
     }, [items])
     const menuLength = menuItem.length
     const currentItem = menuItem[menuLength - 1]
-
     const renderItem = () => {
         return currentItem.data.map((item, index) => {
             /* Check menu-item có phải là item đa cấp */
@@ -55,7 +54,7 @@ function Menu({ children, width, hideOnClick = false, items = [], onChange = def
             render={(attrs) => (
                 <div className={cx('menu-list')} style={{ width: width }} tabIndex="-1" {...attrs}>
                     <MoreMenuPopper className={cx('menu-box')}>
-                        {menuLength > 1 && <HeaderMenu title="Languages" onBack={handleBack} />}
+                        {menuLength > 1 && <HeaderMenu title={currentItem.title} onBack={handleBack} />}
                         <div className={cx('menu-body')}>{renderItem()}</div>
                     </MoreMenuPopper>
                 </div>

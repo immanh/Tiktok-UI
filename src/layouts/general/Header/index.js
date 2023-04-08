@@ -32,7 +32,7 @@ const notLoggedInMenu = [
         title: 'English',
         leftIcon: <FontAwesomeIcon icon={faLanguage} />,
         children: {
-            item: 'Languages',
+            title: 'Languages',
             data: [
                 {
                     code: 'en',
