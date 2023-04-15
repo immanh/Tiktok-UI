@@ -9,7 +9,7 @@ import MenuItem from '~/layouts/Popper/Menu/MenuItem'
 import HeaderMenu from './HeaderMenu'
 
 const cx = classNames.bind(styles)
-const defaultFn = () => {}
+const defaultFn = () => { }
 
 function Menu({ children, width, hideOnClick = false, items = [], onChange = defaultFn }) {
     const [menuItem, setMenuItem] = useState([{ data: items }])
@@ -23,42 +23,46 @@ function Menu({ children, width, hideOnClick = false, items = [], onChange = def
             /* Check menu-item có phải là item đa cấp */
             const isParent = !!item.children
             /**
-             * @bool isParent {true: menu-item có cấp tiếp theo; false: menu-item chỉ có 1 cấp}
-             */
+            * @bool isParent {true: menu-item có cấp tiếp theo; false: menu-item chỉ có 1 cấp}
+            */
+            const handleSelectItem = () => {
+                if (isParent) {
+                    setMenuItem((prev) => [...prev, item.children])
+                } else {
+                    // Những item không có con thì sẽ return item 
+                    onChange(item)
+                }
+            }
             return (
                 <MenuItem
                     data={item}
                     key={index}
-                    onSelect={() => {
-                        if (isParent) {
-                            setMenuItem((prev) => [...prev, item.children])
-                        } else {
-                            onChange(item)
-                        }
-                    }}
+                    onSelect={handleSelectItem}
                 />
             )
         })
     }
+    // Reset to first menu
     const handleBack = () => {
         setMenuItem(menuItem.slice(0, menuLength - 1))
     }
+    const renderMenu = (attrs) => (
+        <div className={cx('menu-list')} style={{ width: width }} tabIndex="-1" {...attrs}>
+            <MoreMenuPopper className={cx('menu-box')}>
+                {menuLength > 1 && <HeaderMenu title={currentItem.title} onBack={handleBack} />}
+                <div className={cx('menu-body')}>{renderItem()}</div>
+            </MoreMenuPopper>
+        </div>
+    )
     return (
         <Tippy
             interactive
-            visible
+            // visible
             hideOnClick={hideOnClick}
             delay={[0, 700]}
             placement="bottom-end"
             onHide={() => setMenuItem(menuItem.slice(0, 1))}
-            render={(attrs) => (
-                <div className={cx('menu-list')} style={{ width: width }} tabIndex="-1" {...attrs}>
-                    <MoreMenuPopper className={cx('menu-box')}>
-                        {menuLength > 1 && <HeaderMenu title={currentItem.title} onBack={handleBack} />}
-                        <div className={cx('menu-body')}>{renderItem()}</div>
-                    </MoreMenuPopper>
-                </div>
-            )}
+            render={renderMenu}
         >
             {children}
         </Tippy>

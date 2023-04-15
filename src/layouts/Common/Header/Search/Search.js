@@ -12,7 +12,7 @@ import * as httpRequest from '~/utils/httpRequest'
 
 import styles from './Search.module.scss'
 import classNames from 'classnames/bind'
-import { useDebounce } from '~/components/hooks'
+import { useDebounce } from '~/hooks'
 const cx = classNames.bind(styles)
 const userSearchFake = [
     {
@@ -78,11 +78,11 @@ function Search() {
     const [searchResult, setSearchResult] = useState([])
     const [showSearchResult, setShowSearchResult] = useState(true)
     const [loading, setLoading] = useState(false)
-    const debounce = useDebounce('Manh', true)
+    const debounceValue = useDebounce('Manh', true)
     const inputSearchRef = useRef()
 
     useEffect(() => {
-        if (!debounce) {
+        if (!debounceValue) {
             return
         }
 
@@ -120,6 +120,12 @@ function Search() {
             setSearchResult([])
         }
     }
+    const handleClearInput = () => {
+
+        setSearchValue('')
+        inputSearchRef.current.focus()
+        setSearchResult([])
+    }
     return (
         // Using a wrapper <div> or <span> tag around the reference
         // element solves this by creating a new parentNode context
@@ -127,18 +133,19 @@ function Search() {
         <div>
             <HeadlessTippy
                 interactive
-                visible
+                // visible
                 // visible={showSearchResult && searchResult.length > 0}
                 render={(attrs) => (
                     <div className={cx('search-box')} tabIndex="-1" {...attrs}>
                         <SearchPopper>
                             <h4 className={cx('search-title')}>Account</h4>
                             <div className={cx('search-box-body')}>
+                                {/* Nếu như nhiều item thì nên tách ra 1 component riêng dùng useMemo để khi re-render không bị ảnh hưởng tới component khác */}
                                 {userSearchFake.map((result) => (
                                     <AccountItem key={result.id} user={result} />
                                 ))}
                             </div>
-                            <p className={cx('search-more-result')}>{`Xem tất cả kết quả dành cho "${debounce}"`}</p>
+                            <p className={cx('search-more-result')}>{`Xem tất cả kết quả dành cho "${debounceValue}"`}</p>
                         </SearchPopper>
                     </div>
                 )}
@@ -149,6 +156,7 @@ function Search() {
                         value={searchValue}
                         placeholder="Search accounts and videos"
                         spellCheck={false}
+                        onChange={() => { }}
                         // onChange={handleSearchValue}
                         onFocus={() => {
                             setShowSearchResult(true)
@@ -156,15 +164,13 @@ function Search() {
                     />
                     <button
                         className={cx('search__clear-btn')}
-                        onClick={() => {
-                            setSearchValue('')
-                            inputSearchRef.current.focus()
-                            setSearchResult([])
-                        }}
+                        onClick={handleClearInput}
                     >
-                        {loading || <FontAwesomeIcon icon={faXmarkCircle} />}
+                        {/* {loading || <FontAwesomeIcon icon={faXmarkCircle} />} */}
+                        <FontAwesomeIcon icon={faXmarkCircle} />
+
                     </button>
-                    {loading && <FontAwesomeIcon className={cx('search__loading')} icon={faCircleNotch} />}
+                    {/* {loading && <FontAwesomeIcon className={cx('search__loading')} icon={faCircleNotch} />} */}
                     <button className={cx('search__search-btn')} onMouseDown={(e) => e.preventDefault()}>
                         <SearchIcon />
                     </button>
