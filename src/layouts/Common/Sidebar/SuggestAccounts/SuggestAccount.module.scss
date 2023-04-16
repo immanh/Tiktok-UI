@@ -4,7 +4,9 @@
 .accounts {
     padding: 16px 0;
     border-top: 0.5px solid rgba(22, 24, 35, 0.06);
-    // width: 224px;
+    // max-width: 224px;
+    width: 224px;
+    line-height: initial;
 }
 .label {
     margin: 0 0 8px 0;
@@ -14,8 +16,8 @@
 }
 // Account Item
 .suggested-account {
-    margin-left: -16px;
-    // padding: 4px;
+    margin-left: -8px;
+    padding: 8px;
     & > img {
         width: 37px;
         height: 37px;
@@ -27,19 +29,20 @@
     }
 }
 .suggsted-info {
+    width: 100%;
+    margin-bottom: 0;
     & > h4 {
         span {
+            width: 145px;
+            display: inline-block;
             color: rgb(22, 24, 35);
             font-weight: 700;
             font-size: 1.6rem;
-            // display: -webkit-box;
-            // -webkit-box-orient: vertical;
-            // -webkit-line-clamp: 2;
-            // overflow-x: hidden;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-            max-width: 145px;
+            line-height: initial;
+            margin-top: -2px;
         }
     }
     span {
