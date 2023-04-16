@@ -15,15 +15,12 @@ function AccountItem({ user, customAvatar, customInfo, live = false }) {
     const infoClasses = cx('username', {
         [customInfo]: customInfo,
     });
-    // const Images = styled.img`
-    //     border-color: var(--primary-color);
-    // `;
     return (
         <Link to={`profile/@${user.full_name}`} className={accClasses}>
             <Images
                 src={user.avatar}
                 className={cx('avatar')}
-                style={live ? { 'border-color': 'var(--primary-color)' } : { 'border-color': 'transparent' }}
+                style={live ? { borderColor: 'var(--primary-color)' } : { borderColor: 'transparent' }}
                 alt={user.full_name}
             />
             <div className={infoClasses}>
@@ -40,6 +37,7 @@ AccountItem.propTypes = {
     user: PropTypes.object.isRequired,
     customAvatar: PropTypes.string,
     customInfo: PropTypes.string,
+    live: PropTypes.bool,
 };
 
 export default AccountItem;

@@ -1,4 +1,4 @@
-import * as httpRequest from '~/utils/httpRequest'
+import * as httpRequest from '~/utils/httpRequest';
 
 const search = async (query, type = 'less') => {
     try {
@@ -7,12 +7,12 @@ const search = async (query, type = 'less') => {
                 q: query,
                 type,
             },
-        })
-        return responseResultApi.data
+        });
+        return responseResultApi.data;
     } catch (err) {
-        console.log(err)
-        // throw new Error(`${err.message}`)
+        // console.log(err);
+        throw new Error(`${err.message}`);
     }
-}
+};
 
-export { search }
+export { search };

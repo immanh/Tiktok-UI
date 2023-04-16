@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import classNames from 'classnames/bind'
-import styles from './Button.module.scss'
-const cx = classNames.bind(styles)
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+import styles from './Button.module.scss';
+const cx = classNames.bind(styles);
 
 function Button({
     to,
@@ -16,6 +16,7 @@ function Button({
     outline = false,
     rounded = false,
     text = false,
+    more = false,
     disabled = false,
     size = 'medium',
     customIcon = '',
@@ -23,11 +24,11 @@ function Button({
     onClick,
     ...others
 }) {
-    let Component = 'button'
+    let Component = 'button';
     const props = {
         onClick,
         ...others,
-    }
+    };
     const classes = cx('wrapper', {
         [size]: size,
         [customClass]: customClass,
@@ -37,25 +38,26 @@ function Button({
         rightButton,
         primary,
         outline,
+        more,
         rounded,
         text,
         disabled,
-    })
+    });
 
     if (disabled) {
         Object.keys(props).forEach((key) => {
             if (key.startsWith('on') && typeof props[key] === 'function') {
-                delete props[key]
+                delete props[key];
             }
-        })
+        });
     }
 
     if (to) {
-        props.to = to
-        Component = Link
+        props.to = to;
+        Component = Link;
     } else if (href) {
-        props.href = href
-        Component = 'a'
+        props.href = href;
+        Component = 'a';
     }
     return (
         <Component className={classes} {...props}>
@@ -64,7 +66,7 @@ function Button({
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
             {rightButton}
         </Component>
-    )
+    );
 }
 Button.propTypes = {
     primary: PropTypes.bool,
@@ -83,5 +85,5 @@ Button.propTypes = {
     rightButton: PropTypes.node,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
-}
-export default Button
+};
+export default Button;

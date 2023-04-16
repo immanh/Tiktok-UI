@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+
 import { suggestedAcc } from '~/api';
 import AccountItem from '~/components/AccountItem';
-import classNames from 'classnames/bind';
 import styles from './SuggestAccount.module.scss';
+import Button from '~/components/Button';
 const cx = classNames.bind(styles);
 
 function AccountList({ label }) {
@@ -18,6 +20,7 @@ function AccountList({ label }) {
                     live={acc.live}
                 />
             ))}
+            <Button more>See all</Button>
         </div>
     );
 }
