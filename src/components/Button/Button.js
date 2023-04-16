@@ -73,6 +73,7 @@ Button.propTypes = {
     outline: PropTypes.bool,
     rounded: PropTypes.bool,
     text: PropTypes.bool,
+    more: PropTypes.bool,
     disabled: PropTypes.bool,
     to: PropTypes.string,
     href: PropTypes.string,
